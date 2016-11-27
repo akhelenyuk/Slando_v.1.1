@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
  */
 public class Advertisement {
     private int id;
+    private String name;
     private LocalDateTime dateOfAdPlacing;
     private String description;
     private double price;
@@ -14,11 +15,26 @@ public class Advertisement {
     private int adViewsNumber;
     private AdPlacer adPlacer;
 
-    public Advertisement(LocalDateTime dateOfAdPlacing, String description, double price, Currency currency, AdPlacer adPlacer) {
-        this.dateOfAdPlacing = dateOfAdPlacing;
+    public Advertisement(String name, String description, double price, Currency currency) {
+        this.name = name;
         this.description = description;
         this.price = price;
         this.currency = currency;
-        this.adPlacer = adPlacer;
+    }
+
+    String getName() {
+        return name;
+    }
+
+    String getDescription() {
+        return description;
+    }
+
+    double getPrice() {
+        return price;
+    }
+
+    Currency getCurrency() {
+        return currency;
     }
 }
