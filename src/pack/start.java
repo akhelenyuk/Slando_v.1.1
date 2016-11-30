@@ -14,6 +14,6 @@ public class start {
 
         Advertisement ad1 = new Advertisement("testtest", "description", 54.00, Currency.UAH);
         AdsToDb adsToDb = new AdsToDb();
-        adsToDb.insert(ad1);
+//        adsToDb.insert(ad1);
     }
 }

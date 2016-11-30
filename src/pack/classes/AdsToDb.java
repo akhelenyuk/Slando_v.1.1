@@ -1,23 +1,27 @@
 package pack.classes;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.List;
 
 /**
  * Created by Oleksandr on 27.11.2016.
  */
 public class AdsToDb {
+
+    Connection connection;
+    Statement statement;
+
+    public AdsToDb(){
+        connection = ConnectionConfig.getConnection();
+        if(connection!=null){
+            System.out.println("Connected successfully!");
+        } else System.out.println("Error. No connection");
+    }
     void createAdsTable(){
 
     }
     public void insert(Advertisement advertisement){
-        Connection connection = null;
-        Statement statement = null;
-
         try{
-            connection = ConnectionConfig.getConnection();
             statement = connection.createStatement();
             statement.execute("INSERT INTO ads(adName,description, price, currency) VALUES('"+advertisement.getName() +"', '" + advertisement.getDescription() +"',"+ advertisement.getPrice()+",'"+ advertisement.getCurrency()+"');");
         }catch(Exception e){
@@ -41,7 +45,22 @@ public class AdsToDb {
 
     }
     Advertisement selectById(int id){return null;}
-    List<Advertisement> selectAll(){return null;}
+    public ResultSetMetaData selectAll(){
+        ResultSet resultSet;
+        ResultSetMetaData resultSetMetaData;
+        String table = "ads";
+        String query = "Select * from " + table;
+
+        try{
+            resultSet = statement.executeQuery(query);
+            resultSetMetaData = resultSet.getMetaData();
+            statement.close();
+            return resultSetMetaData;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     void delete(int id){}
     void update(Advertisement advertisement, int id){}
 }

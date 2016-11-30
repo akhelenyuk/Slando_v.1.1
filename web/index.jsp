@@ -1,4 +1,5 @@
-<%--
+<%@ page import="pack.classes.AdsToDb" %>
+<%@ page import="java.sql.ResultSetMetaData" %><%--
   Created by IntelliJ IDEA.
   User: okhelenyuk
   Date: 24.11.2016
@@ -14,7 +15,19 @@
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
-
+<%--<%--%>
+    <%--AdsToDb adsToDb = new AdsToDb();--%>
+    <%--ResultSetMetaData resultSetMetaData = adsToDb.selectAll();--%>
+    <%--&lt;%&ndash;if(resultSetMetaData!=null){&ndash;%&gt;--%>
+        <%--&lt;%&ndash;for(int i = 1; i<resultSetMetaData.getColumnCount(); i++)&ndash;%&gt;--%>
+        <%--&lt;%&ndash;{%>&ndash;%&gt;--%>
+           <%--&lt;%&ndash;<p><%=resultSetMetaData.getColumnName(i)%></p>&ndash;%&gt;--%>
+    <%--&lt;%&ndash;&lt;%&ndash;%>--%>
+        <%--&lt;%&ndash;}&ndash;%&gt;--%>
+    <%--&lt;%&ndash;%>&ndash;%&gt;--%>
+    <%--&lt;%&ndash;}&ndash;%&gt;--%>
+    <%--&lt;%&ndash;else System.out.println("nothing");%>&ndash;%&gt;--%>
+<%--%>--%>
 <div>
     <div align="center">
 
