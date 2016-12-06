@@ -13,7 +13,7 @@ public class start {
 //        AdPlacer adPlacer = new AdPlacer("John", "Snow", address, "snow@gmail.com", "098-123-12-23");
 
         Advertisement ad1 = new Advertisement("testtest", "description", 54.00, Currency.UAH);
-        AdsToDb adsToDb = new AdsToDb();
+//        AdsToDb adsToDb = new AdsToDb();
 //        adsToDb.insert(ad1);
     }
 }
