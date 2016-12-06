@@ -1,4 +1,5 @@
 <%@ page import="pack.classes.AdsToDb" %>
+<%@ page import="java.sql.*" %>
 <%@ page import="java.sql.ResultSetMetaData" %><%--
   Created by IntelliJ IDEA.
   User: okhelenyuk
@@ -15,69 +16,103 @@
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
-<%--<%--%>
-    <%--AdsToDb adsToDb = new AdsToDb();--%>
-    <%--ResultSetMetaData resultSetMetaData = adsToDb.selectAll();--%>
-    <%--&lt;%&ndash;if(resultSetMetaData!=null){&ndash;%&gt;--%>
-        <%--&lt;%&ndash;for(int i = 1; i<resultSetMetaData.getColumnCount(); i++)&ndash;%&gt;--%>
-        <%--&lt;%&ndash;{%>&ndash;%&gt;--%>
-           <%--&lt;%&ndash;<p><%=resultSetMetaData.getColumnName(i)%></p>&ndash;%&gt;--%>
-    <%--&lt;%&ndash;&lt;%&ndash;%>--%>
-        <%--&lt;%&ndash;}&ndash;%&gt;--%>
-    <%--&lt;%&ndash;%>&ndash;%&gt;--%>
-    <%--&lt;%&ndash;}&ndash;%&gt;--%>
-    <%--&lt;%&ndash;else System.out.println("nothing");%>&ndash;%&gt;--%>
-<%--%>--%>
+
 <div>
     <div align="center">
-
         <input type="search" placeholder="найти...">
         <input type="submit" value="Найти">
     </div>
     <div align="center">
-        <table>
+        <table class="table-bordered">
             <tbody>
-                <tr class="table-row-cell">
-                   <td>
-                       <table class="table-bordered">
-                           <tbody>
-                                <tr class="row border">
-                                    <td class="col-md-4">
-                                        <a href="ссылка на обьявление">
-                                            <img src="images//img1.jpg" class="img-rounded" alt="image1" width="170" height="130">
-                                        </a>
-                                    </td>
-                                    <td class="col-md-4">
-                                        <div>
-                                            <h3>
-                                                <a href="ссылка на обьявление">
-                                                    Header
-                                                </a>
+                <%--<tr class="row border">--%>
+                    <%--<td class="col-md-4">--%>
+                        <%--<a href="ссылка на обьявление">--%>
+                            <%--<img src="images//img1.jpg" class="img-rounded" alt="image1" width="170" height="130">--%>
+                        <%--</a>--%>
+                    <%--</td>--%>
+                    <%--<td class="col-md-4">--%>
+                        <%--<div>--%>
+                            <%--<h3>--%>
+                                <%--<a href="ссылка на обьявление">--%>
+                                    <%--Header--%>
+                                <%--</a>--%>
 
-                                            </h3>
-                                            <p>
-                                                Category
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td class="col-md-4">
-                                        <p>Price</p>
+                            <%--</h3>--%>
+                            <%--<p>--%>
+                                <%--Category--%>
+                            <%--</p>--%>
+                        <%--</div>--%>
+                    <%--</td>--%>
+                    <%--<td class="col-md-4">--%>
+                        <%--<p>Price</p>--%>
 
-                                    </td>
-                                </tr>
-                           </tbody>
-                       </table>
-                   </td>
-                   <td>222</td>
+                    <%--</td>--%>
+                <%--</tr>--%>
+            <%
+                try{
+                    AdsToDb adsToDb = new AdsToDb();
+                    ResultSet resultSet = adsToDb.selectAll();
+                    if(resultSet.next()){
+            %>
+                <tr class="table-row-cell row border">
                     <c:out value="Hello! JSTL is cool"/>
-                   <td>333</td>
-                </tr>
 
+                    <%
+                        for (int i = 1; i < resultSet.getMetaData().getColumnCount(); i++) {
+                    %>
+                        <td><%= resultSet.getString(i) %></td>
+                    <%
+                        }
+                    %>
+                   <%--<td class="col-md-4"><%= resultSet.getString(1) %></td>--%>
+                   <%--<td class="col-md-4"><%= resultSet.getString(2) %></td>--%>
+                   <%--<td class="col-md-4"><%= resultSet.getString(3) %></td>--%>
+                </tr>
+                <%     while (resultSet.next()) {
+                %>
+                <tr class="table-row-cell row border">
+                    <%
+                        for (int i = 1; i < resultSet.getMetaData().getColumnCount(); i++) {
+                    %>
+                    <td><%= resultSet.getString(i) %></td>
+                    <%
+                        }
+                    %>
+                </tr>
+                <% }
+                %>
             </tbody>
         </table>
+        <%  }
+        else {
+        %>
+        <P> Sorry, the query returned no rows! </P>
+        <%
+                }
+            } catch(SQLException e){
+                System.out.println("try error");
+                e.printStackTrace();
+            }
+
+        %>
+
     </div>
 </div>
 
 
 </body>
 </html>
+
+
+
+<%--ResultSetMetaData resultSetMetaData = adsToDb.selectAll();--%>
+<%--if(resultSetMetaData!=null){--%>
+<%--for(int i = 1; i<resultSetMetaData.getColumnCount(); i++)--%>
+<%--{%>--%>
+<%--<p><%=resultSetMetaData.getColumnName(i)%></p>--%>
+<%--&lt;%&ndash;%>
+    <%--}--%>
+<%--%>--%>
+<%--}--%>
+<%--else System.out.println("nothing");%>--%>

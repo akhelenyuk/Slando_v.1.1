@@ -2,6 +2,8 @@ package pack;
 
 import pack.classes.*;
 
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 /**
@@ -14,6 +16,15 @@ public class start {
 
         Advertisement ad1 = new Advertisement("testtest", "description", 54.00, Currency.UAH);
 //        AdsToDb adsToDb = new AdsToDb();
+//        ResultSetMetaData resultSetMetaData = adsToDb.selectAll();
+//        try {
+//            for (int i = 1; i < resultSetMetaData.getColumnCount(); i++) {
+//                System.out.println("OK" + i);
+//            }
+//        } catch (SQLException e) {
+//            System.out.println("Error!");
+//            e.printStackTrace();
+//        }
 //        adsToDb.insert(ad1);
     }
 }

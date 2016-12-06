@@ -7,7 +7,6 @@ import java.util.List;
  * Created by Oleksandr on 27.11.2016.
  */
 public class AdsToDb {
-
     Connection connection;
     Statement statement;
 
@@ -15,6 +14,11 @@ public class AdsToDb {
         connection = ConnectionConfig.getConnection();
         if(connection!=null){
             System.out.println("Connected successfully!");
+            try {
+                statement = connection.createStatement();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         } else System.out.println("Error. No connection");
     }
     void createAdsTable(){
@@ -45,17 +49,15 @@ public class AdsToDb {
 
     }
     Advertisement selectById(int id){return null;}
-    public ResultSetMetaData selectAll(){
+    public ResultSet selectAll(){
         ResultSet resultSet;
-        ResultSetMetaData resultSetMetaData;
         String table = "ads";
         String query = "Select * from " + table;
 
         try{
             resultSet = statement.executeQuery(query);
-            resultSetMetaData = resultSet.getMetaData();
-            statement.close();
-            return resultSetMetaData;
+
+            return resultSet;
         } catch (SQLException e) {
             e.printStackTrace();
         }

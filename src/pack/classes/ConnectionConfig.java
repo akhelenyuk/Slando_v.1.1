@@ -8,12 +8,12 @@ import java.sql.DriverManager;
  */
 public class ConnectionConfig {
     public static Connection getConnection(){
+        String login = "root";
+        String pass = "1212";
         Connection connection = null;
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sys?useSSL=false", "root", "1212");
-
-
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sys?useSSL=false", login, pass);
         } catch(Exception e){
             e.printStackTrace();
         }
