@@ -8,14 +8,20 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>SlandoRent</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
-<body>
+
+
+<body BACKGROUND="<c:url value='/images/background4'/>">
+
+<form action="index" method="get">
+
+<input type="submit" value="Подать объявление" class="btn btn-primary">
 
 <div>
     <div align="center">
@@ -25,6 +31,7 @@
     <div align="center">
         <table class="table-bordered">
             <tbody>
+
                 <%--<tr class="row border">--%>
                     <%--<td class="col-md-4">--%>
                         <%--<a href="ссылка на обьявление">--%>
@@ -100,7 +107,7 @@
     </div>
 </div>
 
-
+</form>
 </body>
 </html>
 

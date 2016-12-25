@@ -13,7 +13,7 @@ public class Advertisement {
     private double price;
     private Currency currency;
     private int adViewsNumber;
-    private AdPlacer adPlacer;
+    private User user;
 
     public Advertisement(String name, String description, double price, Currency currency) {
         this.name = name;

@@ -13,24 +13,24 @@ public class AdsToDb {
     public AdsToDb(){
         connection = ConnectionConfig.getConnection();
         if(connection!=null){
-            System.out.println("Connected successfully!");
+            System.out.println("AdsToDb constructor. Connected successfully!");
             try {
                 statement = connection.createStatement();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        } else System.out.println("Error. No connection");
+        } else System.out.println("AdsToDb constructor. Error. No connection");
     }
     void createAdsTable(){
 
     }
     public void insert(Advertisement advertisement){
         try{
-            statement = connection.createStatement();
             statement.execute("INSERT INTO ads(adName,description, price, currency) VALUES('"+advertisement.getName() +"', '" + advertisement.getDescription() +"',"+ advertisement.getPrice()+",'"+ advertisement.getCurrency()+"');");
         }catch(Exception e){
             e.printStackTrace();
-        }finally {
+        }
+        finally {
             if(statement!=null){
                 try {
                     statement.close();
@@ -50,18 +50,16 @@ public class AdsToDb {
     }
     Advertisement selectById(int id){return null;}
     public ResultSet selectAll(){
-        ResultSet resultSet;
+        ResultSet resultSet = null;
         String table = "ads";
         String query = "Select * from " + table;
 
         try{
             resultSet = statement.executeQuery(query);
-
-            return resultSet;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return resultSet;
     }
     void delete(int id){}
     void update(Advertisement advertisement, int id){}
