@@ -21,105 +21,108 @@
 
 <form action="index" method="get">
 
-<input type="submit" value="Подать объявление" class="btn btn-primary">
+    <div class="pull-right">
+        <c:set var="isLoggedIn" value="isLoggedIn"/>
 
-<div>
-    <div align="center">
-        <input type="search" placeholder="найти...">
-        <input type="submit" value="Найти">
+        <c:if test="${sessionScope[isLoggedIn] != true}">
+            <a href="index?btnIndex=Мой профиль" name="btnIndex">Мой профиль</a>
+        </c:if>
+        <c:if test="${sessionScope[isLoggedIn] == true}">
+            <jsp:useBean id="currentUser" class="pack.classes.User" scope="session"></jsp:useBean>
+            Hello,
+            <jsp:getProperty name="currentUser" property="firstName"/>
+            <input type="submit" name="btnIndex" class="btn btn-xs" value="Выйти">
+        </c:if>
+        <input type="submit" name="btnIndex" value="Подать объявление" class="btn btn-primary">
     </div>
-    <div align="center">
-        <table class="table-bordered">
-            <tbody>
 
-                <%--<tr class="row border">--%>
-                    <%--<td class="col-md-4">--%>
-                        <%--<a href="ссылка на обьявление">--%>
-                            <%--<img src="images//img1.jpg" class="img-rounded" alt="image1" width="170" height="130">--%>
-                        <%--</a>--%>
-                    <%--</td>--%>
-                    <%--<td class="col-md-4">--%>
-                        <%--<div>--%>
-                            <%--<h3>--%>
-                                <%--<a href="ссылка на обьявление">--%>
-                                    <%--Header--%>
-                                <%--</a>--%>
+    <div>
+        <div align="center">
+            <input type="search" placeholder="найти...">
+            <input type="submit" name="btnIndex" value="Найти">
+        </div>
+        <div align="center">
+            <table class="table-bordered">
+                <tbody>
 
-                            <%--</h3>--%>
-                            <%--<p>--%>
-                                <%--Category--%>
-                            <%--</p>--%>
-                        <%--</div>--%>
-                    <%--</td>--%>
-                    <%--<td class="col-md-4">--%>
-                        <%--<p>Price</p>--%>
 
-                    <%--</td>--%>
-                <%--</tr>--%>
-            <%
-                try{
-                    AdsToDb adsToDb = new AdsToDb();
-                    ResultSet resultSet = adsToDb.selectAll();
-                    if(resultSet.next()){
-            %>
+                <%
+                    try {
+                        AdsToDb adsToDb = new AdsToDb();
+                        ResultSet resultSet = adsToDb.selectAll();
+                        if (resultSet.next()) {
+                %>
                 <tr class="table-row-cell row border">
-                    <c:out value="Hello! JSTL is cool"/>
 
                     <%
                         for (int i = 1; i < resultSet.getMetaData().getColumnCount(); i++) {
                     %>
-                        <td><%= resultSet.getString(i) %></td>
+                    <td><%= resultSet.getString(i) %>
+                    </td>
                     <%
                         }
                     %>
-                   <%--<td class="col-md-4"><%= resultSet.getString(1) %></td>--%>
-                   <%--<td class="col-md-4"><%= resultSet.getString(2) %></td>--%>
-                   <%--<td class="col-md-4"><%= resultSet.getString(3) %></td>--%>
+                    <%--<td class="col-md-4"><%= resultSet.getString(1) %></td>--%>
+                    <%--<td class="col-md-4"><%= resultSet.getString(2) %></td>--%>
+                    <%--<td class="col-md-4"><%= resultSet.getString(3) %></td>--%>
                 </tr>
-                <%     while (resultSet.next()) {
+                <% while (resultSet.next()) {
                 %>
                 <tr class="table-row-cell row border">
                     <%
                         for (int i = 1; i < resultSet.getMetaData().getColumnCount(); i++) {
                     %>
-                    <td><%= resultSet.getString(i) %></td>
+                    <td><%= resultSet.getString(i) %>
+                    </td>
                     <%
                         }
                     %>
                 </tr>
                 <% }
                 %>
-            </tbody>
-        </table>
-        <%  }
-        else {
-        %>
-        <P> Sorry, the query returned no rows! </P>
-        <%
+                </tbody>
+            </table>
+            <% } else {
+            %>
+            <P> Sorry, the query returned no rows! </P>
+            <%
+                    }
+                } catch (SQLException e) {
+                    System.out.println("try error");
+                    e.printStackTrace();
                 }
-            } catch(SQLException e){
-                System.out.println("try error");
-                e.printStackTrace();
-            }
 
-        %>
+            %>
 
+        </div>
     </div>
-</div>
 
 </form>
 </body>
 </html>
 
 
+<%--<tr class="row border">--%>
+<%--<td class="col-md-4">--%>
+<%--<a href="ссылка на обьявление">--%>
+<%--<img src="images//img1.jpg" class="img-rounded" alt="image1" width="170" height="130">--%>
+<%--</a>--%>
+<%--</td>--%>
+<%--<td class="col-md-4">--%>
+<%--<div>--%>
+<%--<h3>--%>
+<%--<a href="ссылка на обьявление">--%>
+<%--Header--%>
+<%--</a>--%>
 
-<%--ResultSetMetaData resultSetMetaData = adsToDb.selectAll();--%>
-<%--if(resultSetMetaData!=null){--%>
-<%--for(int i = 1; i<resultSetMetaData.getColumnCount(); i++)--%>
-<%--{%>--%>
-<%--<p><%=resultSetMetaData.getColumnName(i)%></p>--%>
-<%--&lt;%&ndash;%>
-    <%--}--%>
-<%--%>--%>
-<%--}--%>
-<%--else System.out.println("nothing");%>--%>
+<%--</h3>--%>
+<%--<p>--%>
+<%--Category--%>
+<%--</p>--%>
+<%--</div>--%>
+<%--</td>--%>
+<%--<td class="col-md-4">--%>
+<%--<p>Price</p>--%>
+
+<%--</td>--%>
+<%--</tr>--%>

@@ -17,6 +17,7 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserToDb userToDb = new UserToDb();
         HttpSession session = request.getSession();
+        session.setAttribute("error", null);
 
         String login = request.getParameter("login");
         String password = request.getParameter("password");
@@ -28,7 +29,7 @@ public class Login extends HttpServlet {
             response.sendRedirect("index.jsp");
         }
         else{
-            session.setAttribute("error", "Error. Wrong login or wrong password");
+            session.setAttribute("error", "Неправильный логин или пароль");
             response.sendRedirect("login.jsp");
         }
 

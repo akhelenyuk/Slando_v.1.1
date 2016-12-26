@@ -19,6 +19,7 @@
 <body>
 
 <c:set var="RegistrationStatusMessage" value="RegistrationStatusMessage"/>
+<c:set var="error" value="error"/>
 
 <div class="container">
     <div class="row centered-form">
@@ -49,6 +50,11 @@
                         <c:if test="${sessionScope[RegistrationStatusMessage] != null}">
                             <div class="alert alert-success">
                                 <c:out value="${sessionScope[RegistrationStatusMessage]}"/>
+                            </div>
+                        </c:if>
+                        <c:if test="${sessionScope[error] != null}">
+                            <div class="alert alert alert-danger">
+                                <c:out value="${sessionScope[error]}"/>
                             </div>
                         </c:if>
                     </form>
