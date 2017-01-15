@@ -16,6 +16,7 @@ import java.io.IOException;
 public class Registration extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User newUser = new User(
+                0, // юзер создается для удобства, потому id = 0
                 request.getParameter("login"),
                 request.getParameter("password"),
                 request.getParameter("first_name"),

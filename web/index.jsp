@@ -14,115 +14,75 @@
     <title>SlandoRent</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="styles/index.css">
 </head>
 
 
-<body BACKGROUND="<c:url value='/images/background4'/>">
+<body BACKGROUND="<c:url value='/images/background6.jpg'/>">
 
 <form action="index" method="get">
+    <div class="container">
+        <%--заголовок: пользователь и кнопка "Добавить объявление"--%>
+        <div class="row">
+            <%--информация о пользователе--%>
+            <div class="pull-right text-primary">
+                <c:set var="isLoggedIn" value="isLoggedIn"/>
 
-    <div class="pull-right">
-        <c:set var="isLoggedIn" value="isLoggedIn"/>
+                <c:if test="${sessionScope[isLoggedIn] != true}">
+                    <a href="index?btnIndex=Мой профиль" name="btnIndex">Мой профиль</a>
+                </c:if>
+                <c:if test="${sessionScope[isLoggedIn] == true}">
+                    <jsp:useBean id="currentUser" class="pack.classes.User" scope="session"></jsp:useBean>
+                    Hello,
+                    <jsp:getProperty name="currentUser" property="firstName"/>
+                    <input type="submit" name="btnIndex" class="btn btn-xs" value="Выйти">
+                </c:if>
+            </div>
 
-        <c:if test="${sessionScope[isLoggedIn] != true}">
-            <a href="index?btnIndex=Мой профиль" name="btnIndex">Мой профиль</a>
-        </c:if>
-        <c:if test="${sessionScope[isLoggedIn] == true}">
-            <jsp:useBean id="currentUser" class="pack.classes.User" scope="session"></jsp:useBean>
-            Hello,
-            <jsp:getProperty name="currentUser" property="firstName"/>
-            <input type="submit" name="btnIndex" class="btn btn-xs" value="Выйти">
-        </c:if>
-        <input type="submit" name="btnIndex" value="Подать объявление" class="btn btn-primary">
-    </div>
-
-    <div>
-        <div align="center">
-            <input type="search" placeholder="найти...">
-            <input type="submit" name="btnIndex" value="Найти">
+            <%--кнопка "Добавить объявление"--%>
+            <div>
+                <input type="submit" name="btnIndex" value="Подать объявление" class="btn btn-primary">
+            </div>
         </div>
-        <div align="center">
-            <table class="table-bordered">
-                <tbody>
 
+        <%--Поиск--%>
+        <div class="row">
+            <div align="center">
+                <input type="search" placeholder="найти...">
+                <input type="submit" name="btnIndex" value="Найти">
+            </div>
+        </div>
 
-                <%
-                    try {
-                        AdsToDb adsToDb = new AdsToDb();
-                        ResultSet resultSet = adsToDb.selectAll();
-                        if (resultSet.next()) {
-                %>
-                <tr class="table-row-cell row border">
+        <%--Список объявлений--%>
+        <div class="row">
+            <div class="panel panel-default">
+                <%--заголовок--%>
+                <div class="panel-heading">
+                    <h2 class="panel-title">Текущие объявления</h2>
+                </div>
 
-                    <%
-                        for (int i = 1; i < resultSet.getMetaData().getColumnCount(); i++) {
-                    %>
-                    <td><%= resultSet.getString(i) %>
-                    </td>
-                    <%
-                        }
-                    %>
-                    <%--<td class="col-md-4"><%= resultSet.getString(1) %></td>--%>
-                    <%--<td class="col-md-4"><%= resultSet.getString(2) %></td>--%>
-                    <%--<td class="col-md-4"><%= resultSet.getString(3) %></td>--%>
-                </tr>
-                <% while (resultSet.next()) {
-                %>
-                <tr class="table-row-cell row border">
-                    <%
-                        for (int i = 1; i < resultSet.getMetaData().getColumnCount(); i++) {
-                    %>
-                    <td><%= resultSet.getString(i) %>
-                    </td>
-                    <%
-                        }
-                    %>
-                </tr>
-                <% }
-                %>
-                </tbody>
-            </table>
-            <% } else {
-            %>
-            <P> Sorry, the query returned no rows! </P>
-            <%
-                    }
-                } catch (SQLException e) {
-                    System.out.println("try error");
-                    e.printStackTrace();
-                }
+                <%--тело--%>
+                <div class="panel-body">
+                    <table class="table-bordered">
+                        <tbody>
+                            <c:forEach items="${adsList}" var="item">
+                                <tr>
+                                    <td>${item.getName()}</td>
+                                    <td>${item.getDescription()}</td>
+                                    <td>${item.getPrice()}</td>
+                                    <td>${item.getCurrency()}</td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
 
-            %>
-
+                </div>
+            </div>
         </div>
     </div>
-
 </form>
 </body>
 </html>
 
 
-<%--<tr class="row border">--%>
-<%--<td class="col-md-4">--%>
-<%--<a href="ссылка на обьявление">--%>
-<%--<img src="images//img1.jpg" class="img-rounded" alt="image1" width="170" height="130">--%>
-<%--</a>--%>
-<%--</td>--%>
-<%--<td class="col-md-4">--%>
-<%--<div>--%>
-<%--<h3>--%>
-<%--<a href="ссылка на обьявление">--%>
-<%--Header--%>
-<%--</a>--%>
 
-<%--</h3>--%>
-<%--<p>--%>
-<%--Category--%>
-<%--</p>--%>
-<%--</div>--%>
-<%--</td>--%>
-<%--<td class="col-md-4">--%>
-<%--<p>Price</p>--%>
-
-<%--</td>--%>
-<%--</tr>--%>

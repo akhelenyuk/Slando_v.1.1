@@ -1,5 +1,6 @@
 package pack.classes;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -8,33 +9,63 @@ import java.time.LocalDateTime;
 public class Advertisement {
     private int id;
     private String name;
-    private LocalDateTime dateOfAdPlacing;
+    private LocalDate dateOfAdPlacing;
     private String description;
     private double price;
-    private Currency currency;
+    private String currency;
     private int adViewsNumber;
-    private User user;
+    private int userId;
 
-    public Advertisement(String name, String description, double price, Currency currency) {
+    public Advertisement(String name, String description, double price, String currency, int userId) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.currency = currency;
+        this.userId = userId;
     }
 
-    String getName() {
+    public Advertisement(int id, String name, LocalDate dateOfAdPlacing, String description, double price, String currency, int adViewsNumber, int userId) {
+        this.id = id;
+        this.name = name;
+        this.dateOfAdPlacing = dateOfAdPlacing;
+        this.description = description;
+        this.price = price;
+        this.currency = currency;
+        this.adViewsNumber = adViewsNumber;
+        this.userId = userId;
+    }
+
+    public String getName() {
         return name;
     }
 
-    String getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    double getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    Currency getCurrency() {
+    public String getCurrency() {
         return currency;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    @Override
+    public String toString() {
+        return "Advertisement{" +
+                "id=" + id +
+                ",\n name='" + name + '\'' +
+                ",\n dateOfAdPlacing=" + dateOfAdPlacing +
+                ",\n description='" + description + '\'' +
+                ",\n price=" + price +
+                ",\n currency='" + currency + '\'' +
+                ",\n adViewsNumber=" + adViewsNumber +
+                ",\n userId=" + userId +
+                '}';
     }
 }

@@ -14,7 +14,7 @@ public class start {
 //        Address address = new Address("Украина","03012", "Киев", "Драгоманова", "6/1","2");
 //        User adPlacer = new User("John", "Snow", address, "snow@gmail.com", "098-123-12-23");
 
-        Advertisement ad1 = new Advertisement("testtest", "description", 54.00, Currency.UAH);
+        Advertisement ad1 = new Advertisement("testtest", "description", 54.00, "UAH", 20);
 //        AdsToDb adsToDb = new AdsToDb();
 //        ResultSetMetaData resultSetMetaData = adsToDb.selectAll();
 //        try {

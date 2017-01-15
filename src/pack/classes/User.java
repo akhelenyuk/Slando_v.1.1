@@ -6,6 +6,7 @@ import java.util.List;
  * Created by okhelenyuk on 24.11.2016.
  */
 public class User {
+    private int id;
     private String firstName;
     private String lastName;
     private String login;
@@ -23,13 +24,18 @@ public class User {
     public User() {
     }
 
-    public User(String login, String password, String firstName, String lastName, String email) {
+    public User(int id, String login, String password, String firstName, String lastName, String email) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.login = login;
         this.password = password;
         this.ads = null;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getFirstName() {
@@ -55,7 +61,8 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "firstName='" + firstName + '\'' +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +

@@ -26,7 +26,14 @@ public class AdsToDb {
     }
     public void insert(Advertisement advertisement){
         try{
-            statement.execute("INSERT INTO ads(adName,description, price, currency) VALUES('"+advertisement.getName() +"', '" + advertisement.getDescription() +"',"+ advertisement.getPrice()+",'"+ advertisement.getCurrency()+"');");
+            statement.execute("INSERT " +
+                                    "INTO ads(adName,description, price, currency, adPlacerId) " +
+                                    "VALUES('" + advertisement.getName() + "', " +
+                                    "'" + advertisement.getDescription() +"', " +
+                                    advertisement.getPrice()+", " +
+                                    "'" + advertisement.getCurrency()+"', " +
+                                    advertisement.getUserId() + ");" +
+                    "");
         }catch(Exception e){
             e.printStackTrace();
         }

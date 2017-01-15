@@ -15,6 +15,14 @@
         <servlet-name>Login</servlet-name>
         <servlet-class>pack.controller.Login</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddAdvert</servlet-name>
+        <servlet-class>pack.controller.AddAdvert</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Start</servlet-name>
+        <servlet-class>pack.controller.Start</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern>/index</url-pattern>
@@ -26,5 +34,13 @@
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddAdvert</servlet-name>
+        <url-pattern>/addadvert</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Start</servlet-name>
+        <url-pattern>/start</url-pattern>
     </servlet-mapping>
 </web-app>

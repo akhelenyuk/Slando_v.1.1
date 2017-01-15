@@ -88,14 +88,17 @@ public class UserToDb {
                 resultSet = statement.executeQuery("SELECT * FROM " + usersTable + " WHERE login = '" + userLogin + "' " +
                         "AND pass = '" + userPassword + "';");
                 while (resultSet.next()) {
+                    int id;
                     String login, pass, firstName, lastName, email;
+
+                    id = resultSet.getInt(1);
                     login = resultSet.getString(2);
                     pass = resultSet.getString(3);
                     firstName = resultSet.getString(4);
                     lastName = resultSet.getString(5);
                     email = resultSet.getString(6);
 
-                    user = new User(login, pass, firstName, lastName, email);
+                    user = new User(id, login, pass, firstName, lastName, email);
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
