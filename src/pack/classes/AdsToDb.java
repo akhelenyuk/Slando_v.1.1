@@ -7,8 +7,8 @@ import java.util.List;
  * Created by Oleksandr on 27.11.2016.
  */
 public class AdsToDb {
-    Connection connection;
-    Statement statement;
+    Connection connection, connection2;
+    Statement statement, statement2;
 
     public AdsToDb(){
         connection = ConnectionConfig.getConnection();
@@ -68,6 +68,37 @@ public class AdsToDb {
         }
         return resultSet;
     }
+    public ResultSet selectAllImagesByAdId(int adId){
+        ResultSet resultSet = null;
+        String table = "ads_images";
+        String query = "SELECT * FROM " + table + " WHERE ad_id=" + adId + ";";
+
+        connection2 = ConnectionConfig.getConnection();
+        if(connection2!=null){
+            System.out.println("SelectAllImagesByAdId connection. Connected successfully!");
+            try {
+                statement2 = connection.createStatement();
+                resultSet = statement2.executeQuery(query);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else System.out.println("SelectAllImagesByAdId connection. Error. No connection2");
+        return resultSet;
+    }
+//    public ResultSet selectAllJoinImages(){
+//        ResultSet resultSet = null;
+//        String adsTable = "ads";
+//        String imageTable = "ads_images";
+//        String query = "SELECT * FROM " + adsTable + " ads LEFT JOIN " + imageTable + " images ON ads.id=images.ad_id;";
+//
+//        try{
+//            resultSet = statement.executeQuery(query);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return resultSet;
+//    }
+
     void delete(int id){}
     void update(Advertisement advertisement, int id){}
 }

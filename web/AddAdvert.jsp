@@ -31,26 +31,43 @@
                         <h3 class="panel-title">Добавить объявление</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form" action="/addadvert" method="get">
+                        <form role="form" enctype="multipart/form-data" action="/addadvert" method="get">
                             <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="col-xs-3 col-sm-3 col-md-3">
+                                    <div class="form-group">
+                                        <label>Название:</label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-9 col-sm-9 col-md-9">
                                     <div class="form-group">
                                         <input type="text" name="name" class="form-control input-sm" placeholder="Название">
                                     </div>
                                 </div>
-                                <div class="col-xs-6 col-sm-6 col-md-6">
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-3 col-sm-3 col-md-3">
                                     <div class="form-group">
-                                        <input type="text" name="description" class="form-control input-sm" placeholder="Описание">
+                                        <label>Описание:</label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-9 col-sm-9 col-md-9">
+                                    <div class="form-group">
+                                        <textarea class="form-control input-sm" rows="5" style="max-width: 100%;" name="description"></textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="col-xs-3 col-sm-3 col-md-3">
                                     <div class="form-group">
-                                        <input type="text" name="price" class="form-control input-sm" placeholder="Цена">
+                                        <label>Цена:</label>
                                     </div>
                                 </div>
-                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <div class="form-group">
+                                        <input type="text" name="price" class="form-control input-sm">
+                                    </div>
+                                </div>
+                                <div class="col-xs-3 col-sm-3 col-md-3">
                                     <div class="form-group">
                                         <select name="currency" class="form-control input-sm">
                                             <option value="UAH" selected>гривна</option>
@@ -59,16 +76,35 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="col-xs-3 col-sm-3 col-md-3">
                                     <div class="form-group">
-                                        <input type="submit" value="Добавить" class="btn btn-success">
+                                        <label>Фотографии:</label>
+                                        <small>Вы можете загрузить до 5 фотографий</small>
                                     </div>
                                 </div>
                                 <div class="col-xs-6 col-sm-6 col-md-6">
                                     <div class="form-group">
-                                        <input type="submit" value="Отменить" class="btn btn-default">
+                                        <input type="file" name="image1"  accept="image/jpeg, image/pgn, image/gif">
+                                        <input type="file" name="image2" accept="image/jpeg, image/pgn, image/gif">
+                                        <input type="file" name="image3" accept="image/jpeg, image/pgn, image/gif">
+                                        <input type="file" name="image4" accept="image/jpeg, image/pgn, image/gif">
+                                        <input type="file" name="image5" accept="image/jpeg, image/pgn, image/gif">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <input type="submit" value="Добавить" class="btn btn-success btn-block">
+
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <input type="submit" value="Отменить" class="btn btn-default btn-block">
                                     </div>
                                 </div>
                             </div>

@@ -67,6 +67,10 @@
                         <tbody>
                             <c:forEach items="${adsList}" var="item">
                                 <tr>
+                                    <td><a href="#">
+                                        <img src="archive/images/${item.getMainImage()}" alt="image" style="width:128px;height:128px;">
+                                        </a>
+                                    </td>
                                     <td>${item.getName()}</td>
                                     <td>${item.getDescription()}</td>
                                     <td>${item.getPrice()}</td>
