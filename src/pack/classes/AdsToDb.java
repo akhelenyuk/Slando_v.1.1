@@ -24,8 +24,8 @@ public class AdsToDb {
     void createAdsTable(){
 
     }
-    public void insert(Advertisement advertisement){
-        try{
+    public void insertAd(Advertisement advertisement){
+         try{
             statement.execute("INSERT " +
                                     "INTO ads(adName,description, price, currency, adPlacerId) " +
                                     "VALUES('" + advertisement.getName() + "', " +
@@ -34,27 +34,50 @@ public class AdsToDb {
                                     "'" + advertisement.getCurrency()+"', " +
                                     advertisement.getUserId() + ");" +
                     "");
+
         }catch(Exception e){
             e.printStackTrace();
         }
-        finally {
-            if(statement!=null){
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if(connection!=null){
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
     }
+
+    public void insertImage(int adId){
+        try{
+            statement.execute("INSERT INTO ads_images (ad_id, extension) VALUES (" + adId + ", 'jpg');");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public String getImageExtension(int imageId){
+        String extension = null;
+        ResultSet resultSet = null;
+        String table = "ads_images";
+        String query = "SELECT extension FROM " + table + " WHERE image_id = "+ imageId + ";";
+        try{
+            resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                extension = resultSet.getString("extension");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return extension;
+    }
+
+    public int getLastInsertId(){
+        ResultSet resultSet = null;
+        int id = -1;
+        try{
+            resultSet = statement.executeQuery("SELECT LAST_INSERT_ID();");
+            while (resultSet.next()){
+                id = resultSet.getInt("LAST_INSERT_ID()");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return id;
+    }
+
     Advertisement selectById(int id){return null;}
     public ResultSet selectAll(){
         ResultSet resultSet = null;

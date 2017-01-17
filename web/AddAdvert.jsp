@@ -31,7 +31,7 @@
                         <h3 class="panel-title">Добавить объявление</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form" enctype="multipart/form-data" action="/addadvert" method="get">
+                        <form role="form" enctype="multipart/form-data" action="/addadvert" method="POST">
                             <div class="row">
                                 <div class="col-xs-3 col-sm-3 col-md-3">
                                     <div class="form-group">

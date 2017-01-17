@@ -25,6 +25,6 @@ public class start {
 //            System.out.println("Error!");
 //            e.printStackTrace();
 //        }
-//        adsToDb.insert(ad1);
+//        adsToDb.insertAd(ad1);
     }
 }

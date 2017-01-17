@@ -65,18 +65,20 @@
                 <div class="panel-body">
                     <table class="table-bordered">
                         <tbody>
-                            <c:forEach items="${adsList}" var="item">
-                                <tr>
-                                    <td><a href="#">
-                                        <img src="archive/images/${item.getMainImage()}" alt="image" style="width:128px;height:128px;">
-                                        </a>
-                                    </td>
-                                    <td>${item.getName()}</td>
-                                    <td>${item.getDescription()}</td>
-                                    <td>${item.getPrice()}</td>
-                                    <td>${item.getCurrency()}</td>
-                                </tr>
-                            </c:forEach>
+                            <%--<c:if test="${adsList.size()>0}">--%>
+                                <c:forEach items="${adsList}" var="item">
+                                    <tr>
+                                        <td><a href="#">
+                                            <img src="D:/SlandoImages/${item.getMainImage()}" alt="image" style="width:128px;height:128px;">
+                                            </a>
+                                        </td>
+                                        <td>${item.getName()}</td>
+                                        <td>${item.getDescription()}</td>
+                                        <td>${item.getPrice()}</td>
+                                        <td>${item.getCurrency()}</td>
+                                    </tr>
+                                </c:forEach>
+                            <%--</c:if>--%>
                         </tbody>
                     </table>
 

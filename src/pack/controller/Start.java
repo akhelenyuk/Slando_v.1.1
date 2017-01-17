@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -45,9 +46,12 @@ public class Start extends HttpServlet {
                         images
                 );
                 adsList.add(adTemp);
+
             }
-            request.setAttribute("adsList", adsList);
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            request.getSession().setAttribute("adsList", adsList);
+            response.sendRedirect("index.jsp");
+//            request.setAttribute("adsList", adsList);
+//            request.getRequestDispatcher("index.jsp").forward(request, response);
 
         } catch (SQLException e) {
             System.out.println("try error");
