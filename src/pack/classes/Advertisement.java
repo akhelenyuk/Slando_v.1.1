@@ -1,5 +1,10 @@
 package pack.classes;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -75,6 +80,14 @@ public class Advertisement {
             return images.get(0);
         else return null;
     }
+
+//    public void uploadImagesFromDisk (String imageSource){
+//        try {
+//            BufferedImage bufferedImage = ImageIO.read(Files.newInputStream(Paths.get("D:/" + imageSource)));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     @Override
     public String toString() {

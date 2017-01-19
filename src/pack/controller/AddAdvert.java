@@ -60,7 +60,6 @@ public class AddAdvert extends HttpServlet {
     }
     protected void saveImageOnDisk(HttpServletRequest request, int adId, String imageName) throws ServletException, IOException{
         Part filePart = request.getPart("image1"); // Retrieves <input type="file" name="file">
-//        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
         InputStream input = filePart.getInputStream();
 
         File uploads = new File("D:/SlandoImages/" + adId);
