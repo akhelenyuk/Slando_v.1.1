@@ -50,7 +50,6 @@ public class Start extends HttpServlet {
                 while (resultSet2.next()){
                     imagePath = adId + "/" + resultSet2.getInt("image_id") + "." + resultSet2.getString("extension");
                     images.add(imagePath);
-
                 }
 
                 // создаю объект класса Advertisement и добавляю его в ArrayList
@@ -68,8 +67,6 @@ public class Start extends HttpServlet {
                 adsList.add(adTemp);
 
             }
-
-
             //------------------- вариант 1 ----------------------
 //            ServletOutputStream out = response.getOutputStream();
 //            FileInputStream fin = new FileInputStream("D:/SlandoImages/1/3.jpg");
@@ -95,18 +92,15 @@ public class Start extends HttpServlet {
 //                    Files.copy(imageFile.toPath(), response.getOutputStream());
 //            ImageIO.write(ImageIO.read(Files.newInputStream(Paths.get(imageFile.getAbsolutePath()))), "jpg", response.getOutputStream());
 //                    System.out.println("images = " + images);
-
             //------------------- вариант 3 ----------------------
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(ImageIO.read(Files.newInputStream(Paths.get("D:/SlandoImages/" + imagePath))), "jpg", baos);
-            byte[] bytes = baos.toByteArray();
-
-            String url = "data:image/jpg;base64," + Base64.getEncoder().encode(bytes);
-
+//            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//            ImageIO.write(ImageIO.read(Files.newInputStream(Paths.get("D:/SlandoImages/" + imagePath))), "jpg", baos);
+//            byte[] bytes = baos.toByteArray();
+//            String url = "data:image/jpg;base64," + Base64.getEncoder().encode(bytes);
+//            request.getSession().setAttribute("url", url);
 
             // записываю ArrayList объявлений в сессию и перенаправляю на стартовую страницу
             request.getSession().setAttribute("adsList", adsList);
-            request.getSession().setAttribute("url", url);
             response.sendRedirect("index.jsp");
 
         } catch (SQLException e) {

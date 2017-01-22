@@ -23,6 +23,7 @@ import java.nio.file.StandardCopyOption;
 @MultipartConfig
 public class AddAdvert extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
          // узнаем юзера, который создал объявление
         User user = null;
         user = (User)request.getSession().getAttribute("currentUser");

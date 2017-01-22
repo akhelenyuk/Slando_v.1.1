@@ -67,7 +67,7 @@
                                         <input type="text" name="price" class="form-control input-sm">
                                     </div>
                                 </div>
-                                <div class="col-xs-3 col-sm-3 col-md-3">
+                                <div class="col-xs-5 col-sm-5 col-md-5" style="padding-left: 0px">
                                     <div class="form-group">
                                         <select name="currency" class="form-control input-sm">
                                             <option value="UAH" selected>гривна</option>

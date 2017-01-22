@@ -69,8 +69,7 @@
                                 <c:forEach items="${adsList}" var="item">
                                     <tr>
                                         <td><a href="#">
-                                            <img src="${url}" alt="image" style="width:128px;height:128px;">
-                                            <%--<img src="D:/SlandoImages/${item.getMainImage()}" alt="image" style="width:128px;height:128px;">--%>
+                                            <img src="${pageContext.request.contextPath}/getimage?imagePath=${item.getMainImage()}" alt="image" style="width:128px;height:128px;">
                                             </a>
                                         </td>
                                         <td>${item.getName()}</td>

@@ -23,6 +23,10 @@
         <servlet-name>Start</servlet-name>
         <servlet-class>pack.controller.Start</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetImageServlet</servlet-name>
+        <servlet-class>pack.controller.GetImageServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern>/index</url-pattern>
@@ -42,5 +46,9 @@
     <servlet-mapping>
         <servlet-name>Start</servlet-name>
         <url-pattern>/start</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetImageServlet</servlet-name>
+        <url-pattern>/getimage</url-pattern>
     </servlet-mapping>
 </web-app>
