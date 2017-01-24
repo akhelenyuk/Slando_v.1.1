@@ -20,6 +20,8 @@
 
 <body BACKGROUND="<c:url value='/images/background6.jpg'/>">
 
+Server Version: <%= application.getServerInfo() %><br> Servlet Version: <%= application.getMajorVersion() %>.<%= application.getMinorVersion() %> JSP Version: <%= JspFactory.getDefaultFactory().getEngineInfo().getSpecificationVersion() %> <br>
+
 <form action="index" method="get">
     <div class="container">
         <%--заголовок: пользователь и кнопка "Добавить объявление"--%>
@@ -41,7 +43,7 @@
 
             <%--кнопка "Добавить объявление"--%>
             <div>
-                <input type="submit" name="btnIndex" value="Подать объявление" class="btn btn-primary">
+                <input type="submit" name="btnIndex" value="Подать объявление" class="btn btn-primary btn-large">
             </div>
         </div>
 
@@ -87,6 +89,8 @@
         </div>
     </div>
 </form>
+
+
 </body>
 </html>
 

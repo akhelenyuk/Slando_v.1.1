@@ -25,7 +25,7 @@
 
     <div class="container">
         <div class="row centered-form">
-            <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+            <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Добавить объявление</h3>
@@ -85,11 +85,11 @@
                                 </div>
                                 <div class="col-xs-6 col-sm-6 col-md-6">
                                     <div class="form-group">
-                                        <input type="file" name="image1"  accept="image/jpeg, image/pgn, image/gif">
-                                        <input type="file" name="image2" accept="image/jpeg, image/pgn, image/gif">
-                                        <input type="file" name="image3" accept="image/jpeg, image/pgn, image/gif">
-                                        <input type="file" name="image4" accept="image/jpeg, image/pgn, image/gif">
-                                        <input type="file" name="image5" accept="image/jpeg, image/pgn, image/gif">
+                                        <input type="file" name="image"  accept="image/jpeg, image/pgn, image/gif">
+                                        <input type="file" name="image" accept="image/jpeg, image/pgn, image/gif">
+                                        <input type="file" name="image" accept="image/jpeg, image/pgn, image/gif">
+                                        <input type="file" name="image" accept="image/jpeg, image/pgn, image/gif">
+                                        <input type="file" name="image" accept="image/jpeg, image/pgn, image/gif">
                                     </div>
                                 </div>
 
@@ -98,13 +98,13 @@
                             <div class="row">
                                 <div class="col-xs-6 col-sm-6 col-md-6">
                                     <div class="form-group">
-                                        <input type="submit" value="Добавить" class="btn btn-success btn-block">
+                                        <input type="submit" name="button" value="Добавить" class="btn btn-success btn-block">
 
                                     </div>
                                 </div>
                                 <div class="col-xs-6 col-sm-6 col-md-6">
                                     <div class="form-group">
-                                        <input type="submit" value="Отменить" class="btn btn-default btn-block">
+                                        <input type="submit" name="button" value="Отменить" class="btn btn-default btn-block">
                                     </div>
                                 </div>
                             </div>
