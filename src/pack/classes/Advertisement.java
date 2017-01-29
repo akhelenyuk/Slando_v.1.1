@@ -1,10 +1,14 @@
 package pack.classes;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -22,7 +26,7 @@ public class Advertisement {
     private int adViewsNumber;
     private int userId;
 //    private String mainImage;
-    private ArrayList<String> images = null;
+    private ArrayList<String> images;
 
     public Advertisement(int id, String name, LocalDate dateOfAdPlacing, String description, double price, String currency, int adViewsNumber, int userId, ArrayList<String> images) {
         this.id = id;
@@ -34,6 +38,9 @@ public class Advertisement {
         this.adViewsNumber = adViewsNumber;
         this.userId = userId;
         this.images = images;
+    }
+
+    public Advertisement() {
     }
 
     public Advertisement(String name, String description, double price, String currency, int userId) {
@@ -81,13 +88,9 @@ public class Advertisement {
         else return null;
     }
 
-//    public void uploadImagesFromDisk (String imageSource){
-//        try {
-//            BufferedImage bufferedImage = ImageIO.read(Files.newInputStream(Paths.get("D:/" + imageSource)));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public int getId(){
+        return this.id;
+    }
 
     @Override
     public String toString() {
@@ -102,4 +105,100 @@ public class Advertisement {
                 ",\n userId=" + userId +
                 '}';
     }
+
+    public HttpServletRequest showAdvert(HttpServletRequest request){
+        // получаем id объявления из request
+        int advertId = Integer.parseInt(request.getParameter("id"));
+
+        // получаем из базы данных информацию об объявлении по id
+        AdsToDb adsToDb = new AdsToDb();
+        ResultSet resultSet = adsToDb.getAdvert(advertId);
+        System.out.println("ResultSet" + resultSet);
+
+//        //------------------
+//        try {
+//            while(resultSet.next()){
+//                System.out.println(resultSet.getInt("id"));
+//                System.out.println(resultSet.getString("adName"));
+//                System.out.println(resultSet.getDate("dateOfAdPlacing").toLocalDate());
+//                System.out.println(resultSet.getString("description"));
+//                System.out.println(resultSet.getDouble("price"));
+//                System.out.println(resultSet.getString("currency"));
+//                System.out.println(resultSet.getInt("adViewNumber"));
+//                System.out.println(resultSet.getInt("adPlacerId"));
+//            }
+//            //------------------
+
+
+
+//        } catch (SQLException e) {
+//
+        // получаем сессию и записываем в неё наше объявление
+        HttpSession session = request.getSession();
+        session.setAttribute("currentAdvert", resultSetToAdvertisement(resultSet));
+
+        return request;
+
+    }
+
+    public Advertisement resultSetToAdvertisement(ResultSet resultSet){
+        Advertisement adTemp = null;
+
+        try {
+            while(resultSet.next()) {
+                adTemp = new Advertisement(
+                        resultSet.getInt("id"),
+                        resultSet.getString("adName"),
+                        resultSet.getDate("dateOfAdPlacing").toLocalDate(),
+                        resultSet.getString("description"),
+                        resultSet.getDouble("price"),
+                        resultSet.getString("currency"),
+                        resultSet.getInt("adViewNumber"),
+                        resultSet.getInt("adPlacerId"),
+                        null
+                );
+            }
+            System.out.println(adTemp);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return adTemp;
+    }
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

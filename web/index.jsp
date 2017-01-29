@@ -20,8 +20,6 @@
 
 <body BACKGROUND="<c:url value='/images/background6.jpg'/>">
 
-Server Version: <%= application.getServerInfo() %><br> Servlet Version: <%= application.getMajorVersion() %>.<%= application.getMinorVersion() %> JSP Version: <%= JspFactory.getDefaultFactory().getEngineInfo().getSpecificationVersion() %> <br>
-
 <form action="index" method="get">
     <div class="container">
         <%--заголовок: пользователь и кнопка "Добавить объявление"--%>
@@ -70,8 +68,9 @@ Server Version: <%= application.getServerInfo() %><br> Servlet Version: <%= appl
                             <%--<c:if test="${adsList.size()>0}">--%>
                                 <c:forEach items="${adsList}" var="item">
                                     <tr>
-                                        <td><a href="#">
-                                            <img src="${pageContext.request.contextPath}/getimage?imagePath=${item.getMainImage()}" alt="image" style="width:128px;height:128px;">
+                                        <%--клик на картинке перекидает на сервлет, передавая id объявления--%>
+                                        <td><a href="/showadvert?id=${item.getId()}">
+                                            <img src="${pageContext.request.contextPath}/getimage?imagePath=${item.getMainImage()}" name="image" alt="image" style="width:128px;height:128px;">
                                             </a>
                                         </td>
                                         <td>${item.getName()}</td>

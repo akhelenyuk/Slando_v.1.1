@@ -39,7 +39,6 @@ public class AdsToDb {
             e.printStackTrace();
         }
     }
-
     public void insertImage(int adId){
         try{
             statement.execute("INSERT INTO ads_images (ad_id, extension) VALUES (" + adId + ", 'jpg');");
@@ -47,7 +46,6 @@ public class AdsToDb {
             e.printStackTrace();
         }
     }
-
     public String getImageExtension(int imageId){
         String extension = null;
         ResultSet resultSet = null;
@@ -63,7 +61,6 @@ public class AdsToDb {
         }
         return extension;
     }
-
     public int getLastInsertId(){
         ResultSet resultSet = null;
         int id = -1;
@@ -77,8 +74,6 @@ public class AdsToDb {
         }
         return id;
     }
-
-    Advertisement selectById(int id){return null;}
     public ResultSet selectAll(){
         ResultSet resultSet = null;
         String table = "ads";
@@ -108,6 +103,24 @@ public class AdsToDb {
         } else System.out.println("SelectAllImagesByAdId connection. Error. No connection2");
         return resultSet;
     }
+
+    public ResultSet getAdvert(int adId){
+        ResultSet resultSet = null;
+        String table = "ads";
+        String query = "SELECT * FROM " + table + " WHERE id=" + adId + ";";
+
+        if(connection!=null){
+            try {
+                statement = connection.createStatement();
+                resultSet = statement.executeQuery(query);
+                System.out.println("SELECT Advert By AdId");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else System.out.println("SELECT Advert By AdId connection error. No connection");
+        return resultSet;
+    }
+
 //    public ResultSet selectAllJoinImages(){
 //        ResultSet resultSet = null;
 //        String adsTable = "ads";

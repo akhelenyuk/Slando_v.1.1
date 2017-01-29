@@ -27,6 +27,10 @@
         <servlet-name>GetImageServlet</servlet-name>
         <servlet-class>pack.controller.GetImageServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShowAdvert</servlet-name>
+        <servlet-class>pack.controller.ShowAdvert</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern>/index</url-pattern>
@@ -50,5 +54,9 @@
     <servlet-mapping>
         <servlet-name>GetImageServlet</servlet-name>
         <url-pattern>/getimage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowAdvert</servlet-name>
+        <url-pattern>/showadvert</url-pattern>
     </servlet-mapping>
 </web-app>
