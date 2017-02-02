@@ -73,7 +73,11 @@
                                             <img src="${pageContext.request.contextPath}/getimage?imagePath=${item.getMainImage()}" name="image" alt="image" style="width:128px;height:128px;">
                                             </a>
                                         </td>
-                                        <td>${item.getName()}</td>
+                                        <td>
+                                            <a href="/showadvert?id=${item.getId()}">
+                                                ${item.getName()}
+                                            </a>
+                                        </td>
                                         <td>${item.getDescription()}</td>
                                         <td>${item.getPrice()}</td>
                                         <td>${item.getCurrency()}</td>

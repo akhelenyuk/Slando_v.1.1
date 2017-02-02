@@ -3,20 +3,14 @@ package pack.controller;
 import pack.classes.AdsToDb;
 import pack.classes.Advertisement;
 
-import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Base64;
 
 /**
  * Created by Oleksandr on 15.01.2017.
@@ -24,6 +18,8 @@ import java.util.Base64;
 public class Start extends HttpServlet {
     private String imagePath;
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println("***********************************************************************");
         try {
             AdsToDb adsToDb = new AdsToDb();
 
@@ -41,7 +37,7 @@ public class Start extends HttpServlet {
                 int adId = resultSet.getInt("id");
 
                 // выбираю все фото из базы данных, относящиеся к этому объявлению
-                resultSet2 = adsToDb.selectAllImagesByAdId(adId);
+                resultSet2 = adsToDb.getAdvertImages(adId);
 
                 // создаю список адресов фоток, относящиеся к этому объявлению в формате "3/45.jpg", где
                 // 3 - это id объявления и папка, в которой хранятся фото;

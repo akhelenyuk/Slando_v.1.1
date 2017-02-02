@@ -71,7 +71,6 @@ public class AddAdvert extends HttpServlet {
                             saveImageOnDisk(request, adId, imageName, part);
                         }
                     }
-                    System.out.println(parts.toString());
                     response.sendRedirect("addadvertsuccess.jsp");
                     return;
                 } else System.out.println("Error insertAd. Id = " + adId);

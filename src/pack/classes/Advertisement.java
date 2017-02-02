@@ -1,16 +1,16 @@
 package pack.classes;
 
-import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -82,6 +82,10 @@ public class Advertisement {
         return userId;
     }
 
+    public ArrayList<String> getImages() {
+        return images;
+    }
+
     public String getMainImage() {
         if(images.size()>0)
             return images.get(0);
@@ -106,14 +110,14 @@ public class Advertisement {
                 '}';
     }
 
-    public HttpServletRequest showAdvert(HttpServletRequest request){
+    public void showAdvert(HttpServletRequest request){
         // получаем id объявления из request
         int advertId = Integer.parseInt(request.getParameter("id"));
 
         // получаем из базы данных информацию об объявлении по id
         AdsToDb adsToDb = new AdsToDb();
         ResultSet resultSet = adsToDb.getAdvert(advertId);
-        System.out.println("ResultSet" + resultSet);
+        ResultSet resultSetImages = adsToDb.getAdvertImages(advertId);
 
 //        //------------------
 //        try {
@@ -135,14 +139,12 @@ public class Advertisement {
 //
         // получаем сессию и записываем в неё наше объявление
         HttpSession session = request.getSession();
-        session.setAttribute("currentAdvert", resultSetToAdvertisement(resultSet));
-
-        return request;
-
+        session.setAttribute("currentAdvert", resultSetToAdvertisement(resultSet, resultSetImages));
     }
 
-    public Advertisement resultSetToAdvertisement(ResultSet resultSet){
+    public Advertisement resultSetToAdvertisement(ResultSet resultSet, ResultSet resultSetImages){
         Advertisement adTemp = null;
+        ArrayList<String> images = getImagesArrayListFromResultSet(resultSetImages);
 
         try {
             while(resultSet.next()) {
@@ -155,14 +157,46 @@ public class Advertisement {
                         resultSet.getString("currency"),
                         resultSet.getInt("adViewNumber"),
                         resultSet.getInt("adPlacerId"),
-                        null
+                        images
                 );
             }
-            System.out.println(adTemp);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return adTemp;
+    }
+
+    public ArrayList<String> getImagesArrayListFromResultSet(ResultSet resultSetImages){
+        ArrayList<String> images = new ArrayList<>();
+        String imagePath;
+        try {
+            while (resultSetImages.next()){
+                imagePath = resultSetImages.getInt("ad_id") + "/" + resultSetImages.getInt("image_id") + "." + resultSetImages.getString("extension");
+                images.add(imagePath);
+                System.out.println(images);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return images;
+    }
+
+    public void zoomImage (HttpServletRequest request, HttpServletResponse response) throws IOException {
+        ServletOutputStream out = response.getOutputStream();
+        FileInputStream fin = new FileInputStream("D:/SlandoImages/" + request.getParameter("imagePath"));
+
+        BufferedInputStream bin = new BufferedInputStream(fin);
+        BufferedOutputStream bout = new BufferedOutputStream(out);
+        int ch =0;
+        while((ch=bin.read())!=-1)
+        {
+            bout.write(ch);
+        }
+
+        bin.close();
+        fin.close();
+        bout.close();
+        out.close();
     }
 
 

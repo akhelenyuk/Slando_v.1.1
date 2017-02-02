@@ -31,6 +31,10 @@
         <servlet-name>ShowAdvert</servlet-name>
         <servlet-class>pack.controller.ShowAdvert</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ZoomImage</servlet-name>
+        <servlet-class>pack.controller.ZoomImage</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern>/index</url-pattern>
@@ -58,5 +62,9 @@
     <servlet-mapping>
         <servlet-name>ShowAdvert</servlet-name>
         <url-pattern>/showadvert</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ZoomImage</servlet-name>
+        <url-pattern>/zoom</url-pattern>
     </servlet-mapping>
 </web-app>
