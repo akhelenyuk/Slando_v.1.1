@@ -70,8 +70,9 @@
                                 <div class="col-xs-5 col-sm-5 col-md-5" style="padding-left: 0px">
                                     <div class="form-group">
                                         <select name="currency" class="form-control input-sm">
-                                            <option value="UAH" selected>гривна</option>
-                                            <option value="USD">доллары США</option>
+                                            <option value="грн." selected>гривна</option>
+                                            <option value="$">доллары США</option>
+                                            <option value="€">евро</option>
                                         </select>
                                     </div>
                                 </div>

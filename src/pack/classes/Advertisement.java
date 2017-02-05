@@ -199,7 +199,87 @@ public class Advertisement {
         out.close();
     }
 
+    public ArrayList<Advertisement> resultSetToArray(ResultSet resultSetAdvert) {
+        AdsToDb adsToDb = new AdsToDb();
+        ResultSet resultSetImages = null;
+        String imagePath;
 
+        ArrayList<Advertisement> adsList = new ArrayList<>();
+
+        try {
+            while (resultSetAdvert.next()) {
+                // получаю id каждого объявления
+                int adId = resultSetAdvert.getInt("id");
+
+                // выбираю все фото из базы данных, относящиеся к этому объявлению
+                resultSetImages = adsToDb.getAdvertImages(adId);
+
+                // создаю список адресов фоток, относящиеся к этому объявлению в формате "3/45.jpg", где
+                // 3 - это id объявления и папка, в которой хранятся фото;
+                // 45 - id фото и имя файла
+                ArrayList<String> images = new ArrayList<>();
+                while (resultSetImages.next()) {
+                    imagePath = adId + "/" + resultSetImages.getInt("image_id") + "." + resultSetImages.getString("extension");
+                    images.add(imagePath);
+                }
+
+                // создаю объект класса Advertisement и добавляю его в ArrayList
+                Advertisement adTemp = new Advertisement(
+                        adId,
+                        resultSetAdvert.getString("adName"),
+                        resultSetAdvert.getDate("dateOfAdPlacing").toLocalDate(),
+                        resultSetAdvert.getString("description"),
+                        resultSetAdvert.getDouble("price"),
+                        resultSetAdvert.getString("currency"),
+                        resultSetAdvert.getInt("adViewNumber"),
+                        resultSetAdvert.getInt("adPlacerId"),
+                        images
+                );
+                adsList.add(adTemp);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return adsList;
+
+    }
+
+
+
+
+    public void getAllAdverts(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        AdsToDb adsToDb = new AdsToDb();
+        ResultSet resultSetAdvert = adsToDb.getAllAdverts();
+
+        if (resultSetAdvert==null)
+            return;
+
+        ArrayList<Advertisement> adsList = resultSetToArray(resultSetAdvert);
+        System.out.println("adslist" + adsList);
+
+        // записываю ArrayList объявлений в сессию и перенаправляю на стартовую страницу
+        request.getSession().setAttribute("adsList", adsList);
+        response.sendRedirect("index.jsp");
+
+
+    }
+    public void findAdverts(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        AdsToDb adsToDb = new AdsToDb();
+        ResultSet resultSetAdvert = adsToDb.getAdverts(request.getParameter("searchText"));
+
+        if (resultSetAdvert==null)
+            return;
+
+        ArrayList<Advertisement> adsList = resultSetToArray(resultSetAdvert);
+        System.out.println("adslist" + adsList);
+
+        // записываю ArrayList объявлений в сессию и перенаправляю на стартовую страницу
+        request.getSession().setAttribute("adsList", adsList);
+        response.sendRedirect("index.jsp");
+
+
+    }
 
 
 }

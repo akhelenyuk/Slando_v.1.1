@@ -1,7 +1,13 @@
 package pack.controller;
 
+import pack.classes.AdsToDb;
+import pack.classes.Advertisement;
+
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Created by Oleksandr on 24.12.2016.
@@ -35,7 +41,13 @@ public class Index extends javax.servlet.http.HttpServlet {
                 }
             }
             case "Найти":{
-                response.sendRedirect("test.jsp");
+                System.out.println("Search");
+                Advertisement adverts = new Advertisement();
+                try {
+                    adverts.findAdverts(request, response);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
                 break;
             }
             case "Мой профиль":{

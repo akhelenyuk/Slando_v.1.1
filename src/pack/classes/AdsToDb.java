@@ -9,6 +9,7 @@ import java.util.List;
 public class AdsToDb {
     Connection connection;
     Statement statement;
+    ResultSet resultSet;
 
     public AdsToDb(){
         connection = ConnectionConfig.getConnection();
@@ -74,21 +75,21 @@ public class AdsToDb {
         }
         return id;
     }
-    public ResultSet selectAll(){
+
+    public ResultSet getAllAdverts(){
         ResultSet resultSet = null;
         String table = "ads";
         String query = "Select * from " + table;
 
         try{
             resultSet = statement.executeQuery(query);
+            System.out.println("SELECT all");
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return resultSet;
     }
-
     public ResultSet getAdvert(int adId){
-        ResultSet resultSet = null;
         String table = "ads";
         String query = "SELECT * FROM " + table + " WHERE id=" + adId + ";";
 
@@ -103,6 +104,21 @@ public class AdsToDb {
         } else System.out.println("SELECT Advert By AdId connection error. No connection");
         return resultSet;
     }
+    public ResultSet getAdverts(String searchText){
+        String table = "ads";
+        String query = "SELECT * FROM " + table + " WHERE adName LIKE '%" + searchText + "%';";
+
+        if(connection!=null){
+            try {
+                resultSet = statement.executeQuery(query);
+                System.out.println("SELECT Advert By Name");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else System.out.println("SELECT Advert By Name connection error. No connection");
+        return resultSet;
+    }
+
     public ResultSet getAdvertImages(int adId){
         ResultSet resultSet = null;
         String table = "ads_images";

@@ -9,6 +9,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
     <title>SlandoRent</title>
@@ -33,8 +34,9 @@
                 </c:if>
                 <c:if test="${sessionScope[isLoggedIn] == true}">
                     <jsp:useBean id="currentUser" class="pack.classes.User" scope="session"></jsp:useBean>
-                    Hello,
-                    <jsp:getProperty name="currentUser" property="firstName"/>
+                    <a href="test.jsp">Hello,
+                        <jsp:getProperty name="currentUser" property="firstName"/>
+                    </a>
                     <input type="submit" name="btnIndex" class="btn btn-xs" value="Выйти">
                 </c:if>
             </div>
@@ -48,7 +50,7 @@
         <%--Поиск--%>
         <div class="row">
             <div align="center">
-                <input type="search" placeholder="найти...">
+                <input type="search" name="searchText" placeholder="найти...">
                 <input type="submit" name="btnIndex" value="Найти">
             </div>
         </div>
@@ -58,35 +60,43 @@
             <div class="panel panel-default">
                 <%--заголовок--%>
                 <div class="panel-heading">
-                    <h2 class="panel-title">Текущие объявления</h2>
+                    <h2 class="panel-title">Случайные объявления</h2>
                 </div>
 
                 <%--тело--%>
                 <div class="panel-body">
                     <table class="table-bordered">
                         <tbody>
-                            <%--<c:if test="${adsList.size()>0}">--%>
-                                <c:forEach items="${adsList}" var="item">
-                                    <tr>
-                                        <%--клик на картинке перекидает на сервлет, передавая id объявления--%>
-                                        <td><a href="/showadvert?id=${item.getId()}">
-                                            <img src="${pageContext.request.contextPath}/getimage?imagePath=${item.getMainImage()}" name="image" alt="image" style="width:128px;height:128px;">
-                                            </a>
-                                        </td>
-                                        <td>
+                            <tr class="row ">
+                                <c:forEach items="${adsList}" var="item" varStatus="rowCounter">
+                                    <%--клик на картинке перекидает на сервлет, передавая id объявления--%>
+                                    <td class="col-md-2">
+                                        <div class="divHeight">
                                             <a href="/showadvert?id=${item.getId()}">
-                                                ${item.getName()}
+                                                <img class="img-responsive center-block" src="${pageContext.request.contextPath}/getimage?imagePath=${item.getMainImage()}" name="image" alt="image">
                                             </a>
-                                        </td>
-                                        <td>${item.getDescription()}</td>
-                                        <td>${item.getPrice()}</td>
-                                        <td>${item.getCurrency()}</td>
-                                    </tr>
+                                        </div>
+                                        <div class="div-width">
+                                            <h5>
+                                                <a class="text-overflow" href="/showadvert?id=${item.getId()}">
+                                                        ${item.getName()}
+                                                </a>
+                                            </h5>
+
+                                        </div>
+                                        <div>
+                                               <p>${item.getPrice()} ${item.getCurrency()}</p>
+                                        </div>
+                                    </td>
+
+                                    <c:if test="${rowCounter.count % 4 == 0}">
+                                        </tr>
+                                        <tr class="row">
+                                    </c:if>
                                 </c:forEach>
-                            <%--</c:if>--%>
+                            </tr>
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </div>
